@@ -46,10 +46,6 @@ public class Reiziger {
 		return volledigeNaam;
 	}
 	
-	public void voegOVChipkaartToe(OVChipkaart ovc) {
-		listOVC.add(ovc);
-	}
-	
 	public ArrayList<OVChipkaart> getOVChipkaartList() {
 		return listOVC;
 	}

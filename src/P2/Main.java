@@ -28,8 +28,10 @@ public class Main {
 		System.out.println("REIZIGER FIND ALL");
 		
 		for(Reiziger listReiziger : rDAO.findAll()) {
-			System.out.println(listReiziger);
+			System.out.println(listReiziger.getOVChipkaartList());
 		}
+	
+		
 		System.out.println("");
 		System.out.println("REIZIGER FIND BY GB DATUM");
 		

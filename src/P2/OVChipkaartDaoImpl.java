@@ -20,10 +20,10 @@ public class OVChipkaartDaoImpl extends OracleBaseDAO implements OVChipkaartDao{
 		Reiziger reiziger = null;
 		try {
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from OV_CHIPKAART");
+			ResultSet rs = stmt.executeQuery("select * from OV_CHIPKAART o, REIZIGER r where r.reizigerid = o.reizigerid");
 			while(rs.next()) {
-				reiziger = new Reiziger(rs.getInt("reizigerid"), null, null, null, null);
-				ovc = new OVChipkaart(rs.getInt("Kaartnummer"), rs.getDate("Geldigtot"), rs.getInt("Klasse"), rs.getDouble("Saldo"),
+				reiziger = new Reiziger(rs.getInt(5),rs.getString(7), rs.getString(8), rs.getString(9), rs.getDate(10));
+				ovc = new OVChipkaart(rs.getInt(1), rs.getDate(2), rs.getInt(3), rs.getDouble(4),
 						reiziger);
 				
 				list.add(ovc);
@@ -69,7 +69,6 @@ public class OVChipkaartDaoImpl extends OracleBaseDAO implements OVChipkaartDao{
 			stmt.setInt(3, ovchipkaart.getKlasse());
 			stmt.setDouble(4, ovchipkaart.getSaldo());
 			stmt.setInt(5, ovchipkaart.getReiziger().getId());
-			ovchipkaart.getReiziger().voegOVChipkaartToe(ovchipkaart);
 			
 			stmt.executeUpdate();
 			connection.commit();

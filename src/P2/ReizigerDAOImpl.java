@@ -40,11 +40,16 @@ public class ReizigerDAOImpl extends OracleBaseDAO implements ReizigerDao{
 		Reiziger rr = null;
 		
 		try {
+			OVChipkaartDaoImpl ovDAO = new OVChipkaartDaoImpl();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from reiziger");
 			
 			while(rs.next()) {
 				rr = new Reiziger(rs.getInt("reizigerid"), rs.getString("voorletters"),rs.getString("tussenvoegsel"), rs.getString("achternaam"), rs.getDate("gebortedatum"));
+				for(OVChipkaart ovkaart : ovDAO.findByReiziger(rr)) {
+					rr.getOVChipkaartList().add(ovkaart);
+				}
+				
 				list.add(rr);
 			}
 			rs.close();
