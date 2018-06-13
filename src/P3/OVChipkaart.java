@@ -71,7 +71,7 @@ public class OVChipkaart {
 	public String toString() {
 		String x = "";		
 		x += "[Kaartnummer: " + this.kaartnummer + "] - [Geldig tot: " + this.geldigtot + "] - [Klasse: " + this.klasse + "] - [Saldo: " + 
-		this.saldo + "] - [" + reiziger + "]" + " - [" + "]";
+		this.saldo + "] - [" + reiziger + "]" + " - [" + getOVChipkaartProducten() + "]";
 
 		return x;
 	}

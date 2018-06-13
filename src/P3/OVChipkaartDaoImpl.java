@@ -20,16 +20,17 @@ public class OVChipkaartDaoImpl extends OracleBaseDAO implements OVChipkaartDao{
 	public List<OVChipkaart> findAll(){
 		ArrayList<OVChipkaart> list = new ArrayList<OVChipkaart>();
 		OVChipkaart ovc = null;
-		//Reiziger reiziger = null;
 		try {
 			Statement stmt = connection.createStatement();
-			//ResultSet rs = stmt.executeQuery("select * from OV_CHIPKAART o, REIZIGER r where r.reizigerid = o.reizigerid");
 			ResultSet rs = stmt.executeQuery("select * from OV_CHIPKAART");
 			
 			while(rs.next()) {
-				//reiziger = new Reiziger(rs.getInt(5),rs.getString(7), rs.getString(8), rs.getString(9), rs.getDate(10));
 				ovc = new OVChipkaart(rs.getInt(1), rs.getDate(2), rs.getInt(3), rs.getDouble(4),
 						rDao.findByID(rs.getInt(5)));
+				
+				for(Product product : pDao.findByOVChipkaart(ovc)) {
+					ovc.getOVChipkaartProducten().add(product);
+				}
 				
 				list.add(ovc);
 			}

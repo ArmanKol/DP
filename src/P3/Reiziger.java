@@ -17,6 +17,10 @@ public class Reiziger {
 		this.gbdatum = gbd;
 	}
 	
+	public Reiziger(int id) {
+		this.id = id;
+	}
+	
 	public String getVoorletter() {
 		return this.voorletter;
 	}

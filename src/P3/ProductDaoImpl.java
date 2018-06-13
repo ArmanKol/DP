@@ -2,12 +2,17 @@ package P3;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl extends OracleBaseDAO implements ProductDao {
-
+	
+	public ProductDaoImpl() throws SQLException{
+		getConnection();
+	}
+	
 	@Override
 	public List<Product> findAll() {
 		ArrayList<Product> list = new ArrayList<Product>();
@@ -59,19 +64,12 @@ public class ProductDaoImpl extends OracleBaseDAO implements ProductDao {
 			Statement stmt = connection.createStatement();
 			ResultSet findProduct = stmt.executeQuery("select * from product");
 			while(findProduct.next()) {
-				System.out.println(findProduct.getInt("productnummer"));
-				
-				
-				
-			/*
 				for(Ov_chipkaart_product productid : findByPK(ovchipkaart)) {
-					System.out.println("HALLOOOO");
 					if(findProduct.getInt("productnummer") == productid.getProductnummer()) {
-						System.out.println("test");
 						p = new Product(findProduct.getInt("productnummer"), findProduct.getString("productnaam"), findProduct.getString("beschrijving"), findProduct.getDouble("prijs"));
 						findList.add(p);
 					}
-				} */
+				} 
 			}
 			
 			findProduct.close();

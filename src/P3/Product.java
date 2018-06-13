@@ -7,7 +7,6 @@ public class Product {
 	private String productNaam;
 	private String beschrijving;
 	private double prijs;
-	private OVChipkaart producten;
 	private ArrayList<OVChipkaart> ovcList;
 	
 	public ArrayList<OVChipkaart> getOvcList() {
@@ -18,12 +17,11 @@ public class Product {
 		this.ovcList = ovcList;
 	}
 
-	public Product(int pNummer, String pNaam, String beschrijving, double prijs, ovchipkaart producten) {
+	public Product(int pNummer, String pNaam, String beschrijving, double prijs) {
 		this.productNummer = pNummer;
 		this.productNaam = pNaam;
 		this.beschrijving = beschrijving;
 		this.prijs = prijs;
-		this.producten = producten;
 	}
 	
 	public int getpNummer() {
