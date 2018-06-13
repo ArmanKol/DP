@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OVChipkaartDaoImpl extends OracleBaseDAO implements OVChipkaartDao{
-		
+	
+	private ProductDao pDao = new ProductDaoImpl();
+	private ReizigerDAOImpl rDao = new ReizigerDAOImpl();
+	
 	public OVChipkaartDaoImpl() throws SQLException{
 		getConnection();
 	}
@@ -17,14 +20,17 @@ public class OVChipkaartDaoImpl extends OracleBaseDAO implements OVChipkaartDao{
 	public List<OVChipkaart> findAll(){
 		ArrayList<OVChipkaart> list = new ArrayList<OVChipkaart>();
 		OVChipkaart ovc = null;
-		Reiziger reiziger = null;
+		//Reiziger reiziger = null;
 		try {
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from OV_CHIPKAART o, REIZIGER r where r.reizigerid = o.reizigerid");
+			//ResultSet rs = stmt.executeQuery("select * from OV_CHIPKAART o, REIZIGER r where r.reizigerid = o.reizigerid");
+			ResultSet rs = stmt.executeQuery("select * from OV_CHIPKAART");
+			
 			while(rs.next()) {
-				reiziger = new Reiziger(rs.getInt(5),rs.getString(7), rs.getString(8), rs.getString(9), rs.getDate(10));
+				//reiziger = new Reiziger(rs.getInt(5),rs.getString(7), rs.getString(8), rs.getString(9), rs.getDate(10));
 				ovc = new OVChipkaart(rs.getInt(1), rs.getDate(2), rs.getInt(3), rs.getDouble(4),
-						reiziger);
+						rDao.findByID(rs.getInt(5)));
+				
 				list.add(ovc);
 			}
 			
@@ -47,6 +53,8 @@ public class OVChipkaartDaoImpl extends OracleBaseDAO implements OVChipkaartDao{
 		
 			while(findReizigerid.next()) {
 				ovc = new OVChipkaart(findReizigerid.getInt("kaartnummer"), findReizigerid.getDate("geldigtot"), findReizigerid.getInt("klasse"), findReizigerid.getDouble("saldo"), reiziger);
+				ovc.setOVChipkaartProducten(pDao.findByOVChipkaart(ovc));
+				
 				findList.add(ovc);
 			}
 			

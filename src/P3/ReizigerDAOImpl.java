@@ -81,6 +81,25 @@ public class ReizigerDAOImpl extends OracleBaseDAO implements ReizigerDao{
 		}
 		return findList;
 	}
+	
+	public Reiziger findByID(int id) {
+		Reiziger rr = null;
+		
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet findGB = stmt.executeQuery("select * from reiziger where reizigerid = '" + id + "'");
+			
+			while (findGB.next()){
+				rr = new Reiziger(findGB.getInt("reizigerid"), findGB.getString("voorletters"), findGB.getString("tussenvoegsel"), findGB.getString("achternaam"), findGB.getDate("gebortedatum"));
+			}
+			
+			findGB.close();
+			stmt.close();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return rr;
+	}
 
 	@Override
 	public Reiziger update(Reiziger reiziger) {

@@ -1,16 +1,29 @@
 package P3;
 
+import java.util.ArrayList;
+
 public class Product {
 	private int productNummer;
 	private String productNaam;
 	private String beschrijving;
 	private double prijs;
+	private OVChipkaart producten;
+	private ArrayList<OVChipkaart> ovcList;
 	
-	public Product(int pNummer, String pNaam, String beschrijving, double prijs) {
+	public ArrayList<OVChipkaart> getOvcList() {
+		return ovcList;
+	}
+
+	public void setOvcList(ArrayList<OVChipkaart> ovcList) {
+		this.ovcList = ovcList;
+	}
+
+	public Product(int pNummer, String pNaam, String beschrijving, double prijs, ovchipkaart producten) {
 		this.productNummer = pNummer;
 		this.productNaam = pNaam;
 		this.beschrijving = beschrijving;
 		this.prijs = prijs;
+		this.producten = producten;
 	}
 	
 	public int getpNummer() {

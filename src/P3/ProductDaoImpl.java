@@ -59,12 +59,19 @@ public class ProductDaoImpl extends OracleBaseDAO implements ProductDao {
 			Statement stmt = connection.createStatement();
 			ResultSet findProduct = stmt.executeQuery("select * from product");
 			while(findProduct.next()) {
+				System.out.println(findProduct.getInt("productnummer"));
+				
+				
+				
+			/*
 				for(Ov_chipkaart_product productid : findByPK(ovchipkaart)) {
+					System.out.println("HALLOOOO");
 					if(findProduct.getInt("productnummer") == productid.getProductnummer()) {
+						System.out.println("test");
 						p = new Product(findProduct.getInt("productnummer"), findProduct.getString("productnaam"), findProduct.getString("beschrijving"), findProduct.getDouble("prijs"));
 						findList.add(p);
 					}
-				}
+				} */
 			}
 			
 			findProduct.close();

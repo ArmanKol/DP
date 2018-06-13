@@ -2,6 +2,7 @@ package P3;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
 	public static void main(String[] args) throws SQLException {
@@ -20,13 +21,22 @@ public class Main {
 		
 		//ovDAO.delete(ov1);
 		//rDAO.delete(r1);
-		
-		
-		
-		System.out.println("OVCHIPKAART FIND ALL");
-		for(OVChipkaart listOVChipkaart : ovDAO.findAll()) {
-			System.out.println(listOVChipkaart);
+		System.out.println("OVCHIPKAART PRODUCTEN");
+		for(Product listp : pDAO.findByOVChipkaart(ov1)) {
+			System.out.println(listp);
 		}
+		
+		System.out.println("REIZIGERS");
+		for(OVChipkaart listp : ovDAO.findAll()) {
+			System.out.println(listp);
+		}		
+		
+		/*
+		System.out.println("OVCHIPKAART FIND ALL");
+		for(OVChipkaart listOVChipkaart : ovDAO.findByReiziger(r1)) {
+			System.out.println(listOVChipkaart.getOVChipkaartProducten());
+		}
+		
 		System.out.println("");
 		System.out.println("REIZIGER FIND ALL");
 		
@@ -53,7 +63,7 @@ public class Main {
 		System.out.println("OVCHIPKAART PRODUCTEN");
 		for(Product listp : pDAO.findByOVChipkaart(ov2)) {
 			System.out.println(listp);
-		}
+		}*/
 		
 	}
 

@@ -1,12 +1,16 @@
 package P3;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OVChipkaart {
 	private int kaartnummer, klasse;
 	private Reiziger reiziger;
+	private Product product;
 	private double saldo;
 	private Date geldigtot;
+	private List<Product> listOVCProduct = new ArrayList<>();
 	
 	
 	public OVChipkaart(int krtnmmr, Date geldig, int ksse, double sldo, Reiziger reiziger) {
@@ -19,6 +23,14 @@ public class OVChipkaart {
 	
 	public OVChipkaart(int krtnmmr) {
 		this.kaartnummer = krtnmmr;
+	}
+	
+	public List<Product> getOVChipkaartProducten() {
+		return listOVCProduct;
+	}
+	
+	public void setOVChipkaartProducten(List<Product> a) {
+		this.listOVCProduct = a;
 	}
 	
 	public int getKaartnummer() {
@@ -59,7 +71,7 @@ public class OVChipkaart {
 	public String toString() {
 		String x = "";		
 		x += "[Kaartnummer: " + this.kaartnummer + "] - [Geldig tot: " + this.geldigtot + "] - [Klasse: " + this.klasse + "] - [Saldo: " + 
-		this.saldo + "] - [ReizigersId: " + reiziger.getId() + "]";
+		this.saldo + "] - [" + reiziger + "]" + " - [" + "]";
 
 		return x;
 	}
