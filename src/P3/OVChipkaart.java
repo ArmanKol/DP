@@ -7,7 +7,6 @@ import java.util.List;
 public class OVChipkaart {
 	private int kaartnummer, klasse;
 	private Reiziger reiziger;
-	private Product product;
 	private double saldo;
 	private Date geldigtot;
 	private List<Product> listOVCProduct = new ArrayList<>();
@@ -71,7 +70,7 @@ public class OVChipkaart {
 	public String toString() {
 		String x = "";		
 		x += "[Kaartnummer: " + this.kaartnummer + "] - [Geldig tot: " + this.geldigtot + "] - [Klasse: " + this.klasse + "] - [Saldo: " + 
-		this.saldo + "] - [" + reiziger + "]" + " - [" + getOVChipkaartProducten() + "]";
+		this.saldo + "] - [" + reiziger.toString2() + "]" + " - [" + getOVChipkaartProducten() + "]";
 
 		return x;
 	}

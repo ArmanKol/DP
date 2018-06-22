@@ -81,6 +81,10 @@ public class Reiziger {
 	}
 	
 	public String toString() {
+		return "[ id: " + getId() + "] [naam: " + getNaam() + "] [geboortedatum: " + gbdatum + "] [" + listOVC +"]";
+	}
+	
+	public String toString2() {
 		return "[ id: " + getId() + "] [naam: " + getNaam() + "] [geboortedatum: " + gbdatum + "]";
 	}
 }

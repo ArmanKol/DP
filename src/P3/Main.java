@@ -33,6 +33,12 @@ public class Main {
 		for(OVChipkaart listp : ovDAO.findAll()) {
 			System.out.println(listp);
 		}
+		
+		System.out.println("");
+		System.out.println("REIZIGER");
+		for(Reiziger listp : rDAO.findAll()) {
+			System.out.println(listp);
+		}
 	}
 
 }

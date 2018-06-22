@@ -31,29 +31,6 @@ public class ProductDaoImpl extends OracleBaseDAO implements ProductDao {
 		}
 		return list;
 	}
-	
-	@Override
-	public List<Ov_chipkaart_product> findByPK(OVChipkaart ovchipkaart){
-		ArrayList<Ov_chipkaart_product> findList = new ArrayList<>();
-		Ov_chipkaart_product p = null;
-		
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet findProductnummer = stmt.executeQuery("select * from ov_chipkaart_product where kaartnummer = " + ovchipkaart.getKaartnummer());
-			
-			while(findProductnummer.next()) {
-				p = new Ov_chipkaart_product(findProductnummer.getInt("kaartnummer"), findProductnummer.getInt("productnummer"));
-				findList.add(p);
-			}
-			
-			findProductnummer.close();
-			stmt.close();
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return findList;
-	}
-
 
 	@Override
 	public List<Product> findByOVChipkaart(OVChipkaart ovchipkaart) {
@@ -62,14 +39,10 @@ public class ProductDaoImpl extends OracleBaseDAO implements ProductDao {
 		
 		try {
 			Statement stmt = connection.createStatement();
-			ResultSet findProduct = stmt.executeQuery("select * from product");
+			ResultSet findProduct = stmt.executeQuery("select * from product p, ov_chipkaart_product ocp where p.productnummer = ocp.productnummer and kaartnummer =" + ovchipkaart.getKaartnummer());
 			while(findProduct.next()) {
-				for(Ov_chipkaart_product productid : findByPK(ovchipkaart)) {
-					if(findProduct.getInt("productnummer") == productid.getProductnummer()) {
-						p = new Product(findProduct.getInt("productnummer"), findProduct.getString("productnaam"), findProduct.getString("beschrijving"), findProduct.getDouble("prijs"));
-						findList.add(p);
-					}
-				} 
+				p = new Product(findProduct.getInt("productnummer"), findProduct.getString("productnaam"), findProduct.getString("beschrijving"), findProduct.getDouble("prijs"));
+				findList.add(p);
 			}
 			
 			findProduct.close();

@@ -43,6 +43,8 @@ public class OVChipkaartDaoImpl extends OracleBaseDAO implements OVChipkaartDao{
 		return list;
 	}
 	
+	
+	
 	@Override
 	public List<OVChipkaart> findByReiziger(Reiziger reiziger){
 		ArrayList<OVChipkaart> findList = new ArrayList<>();
